@@ -1,6 +1,5 @@
 import React from 'react';
 import { Message } from '../contexts/ChatContext';
-import LoadingSpinner from './LoadingSpinner';
 
 interface MessageBubbleProps {
   message: Message;
