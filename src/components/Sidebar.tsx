@@ -23,7 +23,7 @@ const Sidebar: React.FC = () => {
     selectConversation 
   } = useChat();
   const { user } = useAuth();
-  const logOutmutation =useSignOut()
+  const logOutMutation = useSignOut()
   
   // State for delete confirmation modal
   const [deleteModalState, setDeleteModalState] = useState<{
@@ -73,7 +73,7 @@ const Sidebar: React.FC = () => {
   };
 
   const handleConfirmSignOut = async () => {
-    await logOutmutation.mutateAsync();
+    await logOutMutation.mutateAsync();
     setSignOutModalOpen(false);
   };
 
@@ -83,7 +83,7 @@ const Sidebar: React.FC = () => {
 
   const handleLoginClick = async () => {
     // Sign out anonymous user to go back to login screen
-    await logOutmutation.mutateAsync();
+    await logOutMutation.mutateAsync();
   };
 
   const formatDate = (dateString: string) => {

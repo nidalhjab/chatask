@@ -56,8 +56,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
     };
   }, []);
 
-  
-
   const value: AuthContextType = {
     user,
     loading,
