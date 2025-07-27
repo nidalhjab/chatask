@@ -167,22 +167,6 @@ npm start
 
 The frontend will start on `http://localhost:3000`
 
-### Production Deployment
-
-#### Backend Deployment
-
-```bash
-cd backend
-pip install gunicorn
-gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
-```
-
-#### Frontend Deployment
-
-```bash
-npm run build
-# Deploy the 'build' folder to your hosting service
-```
 
 ## 🔧 Configuration
 
@@ -247,19 +231,6 @@ chatask/
 ├── package.json             # Frontend dependencies
 ├── README.md               # This file
 └── .gitignore             # Git ignore rules
-```
-
-## 🧪 Testing
-
-### Frontend Testing
-```bash
-npm test
-```
-
-### Backend Testing
-```bash
-cd backend
-python -m pytest
 ```
 
 ## 🚀 Features in Detail
