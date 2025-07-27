@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useChat } from '../contexts/ChatContext';
 import { useAuth } from '../contexts/AuthContext';
 import ConfirmModal from './ConfirmModal';
+import { useSignOut } from '../api/auth';
 
 // Simple icon components (will be replaced with lucide-react after npm install)
 const PlusIcon = () => <span>+</span>;
@@ -21,7 +22,8 @@ const Sidebar: React.FC = () => {
     deleteConversation, 
     selectConversation 
   } = useChat();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
+  const logOutMutation = useSignOut()
   
   // State for delete confirmation modal
   const [deleteModalState, setDeleteModalState] = useState<{
@@ -71,7 +73,7 @@ const Sidebar: React.FC = () => {
   };
 
   const handleConfirmSignOut = async () => {
-    await signOut();
+    await logOutMutation.mutateAsync();
     setSignOutModalOpen(false);
   };
 
@@ -81,7 +83,7 @@ const Sidebar: React.FC = () => {
 
   const handleLoginClick = async () => {
     // Sign out anonymous user to go back to login screen
-    await signOut();
+    await logOutMutation.mutateAsync();
   };
 
   const formatDate = (dateString: string) => {

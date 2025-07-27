@@ -208,7 +208,7 @@ export const ChatContextProvider: React.FC<ChatContextProviderProps> = ({ childr
     );
   }, [queryClient]);
   
-  const updateMessageInCache = useCallback((conversationId: string, messageId: string, content: string, append: boolean = false) => {
+  const updateMessageInCache = useCallback((conversationId: string, messageId: string, content: string, append = false) => {
     queryClient.setQueryData(QUERY_KEYS.messages(conversationId), (old: Message[] = []) =>
       old.map(msg => 
         msg.id === messageId 

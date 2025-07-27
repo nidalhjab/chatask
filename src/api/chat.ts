@@ -62,7 +62,7 @@ export class ChatAPI {
   }
 
   // Create a new conversation
-  static async createConversation(title: string = 'New Chat'): Promise<Conversation> {
+  static async createConversation(title = 'New Chat'): Promise<Conversation> {
     const headers = await getAuthHeaders();
     const response = await fetch(`${API_BASE_URL}/api/conversations`, {
       method: 'POST',
@@ -126,18 +126,20 @@ export class ChatAPI {
     const decoder = new TextDecoder();
     
     try {
-      while (true) {
-        const { done, value } = await reader.read();
+      let done = false;
+      while (!done) {
+        const { done: doneReading, value } = await reader.read();
+        done = doneReading;
         if (done) break;
-        
+    
         const chunk = decoder.decode(value);
         const lines = chunk.split('\n');
-        
+    
         for (const line of lines) {
           if (line.startsWith('data: ')) {
             try {
               const data = JSON.parse(line.slice(6));
-              
+    
               switch (data.type) {
                 case 'user_message':
                   onUserMessage?.(data.message);
@@ -161,7 +163,7 @@ export class ChatAPI {
           }
         }
       }
-    } finally {
+    }  finally {
       reader.releaseLock();
     }
   }

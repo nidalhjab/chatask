@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { 
   User,
-  signOut as firebaseSignOut,
   onAuthStateChanged
 } from 'firebase/auth';
 import { getFirebaseAuth, initializeFirebase } from '../config/firebase';
@@ -10,7 +9,6 @@ import { cleanFirebaseError } from '../utils/errorUtils';
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -58,21 +56,9 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
     };
   }, []);
 
-  const signOut = async () => {
-    try {
-      const auth = getFirebaseAuth();
-      await firebaseSignOut(auth);
-    } catch (error) {
-      const cleanedError = cleanFirebaseError(error);
-      console.error('Error signing out:', cleanedError);
-      throw new Error(cleanedError);
-    }
-  };
-
   const value: AuthContextType = {
     user,
     loading,
-    signOut,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

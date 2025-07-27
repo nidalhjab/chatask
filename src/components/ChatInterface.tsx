@@ -7,12 +7,10 @@ const ChatInterface: React.FC = () => {
   const { 
     currentConversation, 
     currentMessages, 
-    currentConversationId, 
     isStreaming, 
     streamingMessageId, 
     error, 
     sendMessage, 
-    createNewConversation, 
     setError 
   } = useChat();
   const [inputMessage, setInputMessage] = useState('');
@@ -32,9 +30,6 @@ const ChatInterface: React.FC = () => {
     setInputMessage('');
     
     try {
-      if (!currentConversationId) {
-        await createNewConversation();
-      }
       await sendMessage(message);
     } catch (error) {
       console.error('Error sending message:', error);

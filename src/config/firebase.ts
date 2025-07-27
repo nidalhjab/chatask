@@ -44,11 +44,5 @@ export const getFirebaseAuth = (): Auth => {
   return auth;
 };
 
-export const getFirebaseFirestore = (): Firestore => {
-  if (!db) {
-    throw new Error('Firebase not initialized. Call initializeFirebase() first.');
-  }
-  return db;
-};
 
 export { auth, db }; 
